@@ -4,7 +4,7 @@ if (is_admin()) {
     add_action('admin_menu', 'create_theme_options_page');
 
     function create_theme_options_page() {
-        add_options_page('Theme Options', 'Havas theme options', 'administrator','options-theme', 'build_options_page');
+        add_options_page('Theme Options', 'theme options', 'administrator','options-theme', 'build_options_page');
     }
 
     function build_options_page() { ?>
@@ -28,7 +28,6 @@ if (is_admin()) {
         register_setting('plugin_options', 'plugin_options', 'validate_setting');
 
         // add Sections
-        add_settings_section('home_section', 'Home Page Settings', 'section_cb','options-theme');
         add_settings_section('footer_section', 'Footer Settings', 'section_cb','options-theme');
         add_settings_section('cookie_section', 'Cookie Settings', 'section_cb','options-theme');
         add_settings_section('social_section', 'Social Settings', 'section_cb','options-theme');
@@ -37,10 +36,6 @@ if (is_admin()) {
         add_settings_section('contact_clients_section', 'Contact Clients Settings', 'section_cb','options-theme');
         add_settings_section('contact_investors_section', 'Contact Investors Settings', 'section_cb','options-theme');
         add_settings_section('contact_talents_section', 'Contact Talents Settings', 'section_cb','options-theme');
-
-        // add fields Home Page
-        add_settings_field('logo_havas', 'Logo Havas :', 'logo_havas_setting', 'options-theme', 'home_section');
-        add_settings_field('logo_havas_group', 'Logo Havas Group :', 'logo_havas_group_setting', 'options-theme', 'home_section');
 
         //add fields Footer
         add_settings_field('mention_legal_link', 'Mention Légal Link', 'mention_legal_link_setting', 'options-theme', 'footer_section');
@@ -100,25 +95,6 @@ if (is_admin()) {
     function section_cb() {
     }
 
-    // logo havas
-    function logo_havas_setting(){
-        $options = get_option('plugin_options'); ?>
-        <div>
-            <input type="text" id="logo_havas" name="plugin_options[logo_havas]" value="<?php echo esc_url( $options['logo_havas'] ); ?>" class="regular-text">
-            <input type="button"  name="upload-btn" id="upload-btn-logo-havas" class="button-secondary" value="Upload Image">
-            <span class="description">Uploading an image</span>
-        </div>
-    <?php }
-
-    // logo havas group
-    function logo_havas_group_setting(){
-        $options = get_option('plugin_options'); ?>
-        <div>
-            <input type="text" id="logo_havas_group" name="plugin_options[logo_havas_group]" value="<?php echo esc_url( $options['logo_havas_group'] ); ?>" class="regular-text">
-            <input type="button"  name="upload-btn" id="upload-btn-logo-havas-group" class="button-secondary" value="Upload Image">
-            <span class="description">Uploading an image</span>
-        </div>
-    <?php }
 
     // Mention legal link
     function mention_legal_link_setting() {
